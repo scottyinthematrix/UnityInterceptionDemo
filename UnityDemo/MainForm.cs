@@ -27,7 +27,10 @@ namespace UnityDemo
         private void InitializeContainer()
         {
             container = new UnityContainer();
-            container.LoadConfiguration();
+            container.AddNewExtension<Interception>();
+            container.RegisterType<IBankAccount, BankAccount>(
+                new InterceptionBehavior<PolicyInjectionBehavior>(),
+                new Interceptor<InterfaceInterceptor>());
 
         }
 
