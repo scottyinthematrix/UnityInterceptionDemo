@@ -2,24 +2,21 @@
 
 namespace UnityDemo.BusinessLogic
 {
-    public /*sealed*/ class BankAccount /*: MarshalByRefObject*/ : IBankAccount
+    public sealed class BankAccount
     {
         private decimal balance;
 
-        //[TraceCallHandler("interception")]
-        public virtual decimal GetCurrentBalance()
+        public decimal GetCurrentBalance()
         {
             return balance;
         }
 
-        //[TraceCallHandler("interception")]
-        public virtual void Deposit(decimal depositAmount)
+        public void Deposit(decimal depositAmount)
         {
             balance += depositAmount;
         }
 
-        //[TraceCallHandler("interception")]
-        public virtual void Withdraw(decimal withdrawAmount)
+        public void Withdraw(decimal withdrawAmount)
         {
             if (withdrawAmount > balance)
             {
