@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Security.Principal;
 using System.Windows.Forms;
+using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.InterceptionExtension;
 using UnityDemo.BusinessLogic;
 
@@ -12,15 +13,25 @@ namespace UnityDemo
     public partial class MainForm : Form
     {
         private BankAccount bankAccount;
+        private IUnityContainer container;
 
         public MainForm()
         {
             InitializeComponent();
+            InitializeContainer();
             PopulateUserList();
-            bankAccount =
-                Intercept.NewInstance<BankAccount>(
-                    new VirtualMethodInterceptor(),
-                    new[] { new TraceBehavior(new TraceSource("interception")) });
+            bankAccount = container.Resolve<BankAccount>();
+        }
+
+        private void InitializeContainer()
+        {
+            container = new UnityContainer();
+            container.AddNewExtension<Interception>();
+            container.RegisterType<BusinessLogic.BankAccount>(
+                new Interceptor<VirtualMethodInterceptor>(),
+                new InterceptionBehavior(new TraceBehavior(
+                                     new TraceSource("interception"))));
+
         }
 
         private void depositButton_Click(object sender, EventArgs e)
@@ -104,6 +115,7 @@ namespace UnityDemo
 
         private void exitButton_Click(object sender, EventArgs e)
         {
+            container.Dispose();
             Application.Exit();
         }
 
