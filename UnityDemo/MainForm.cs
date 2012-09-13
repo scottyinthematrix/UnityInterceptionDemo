@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Security.Principal;
 using System.Windows.Forms;
 using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.Configuration;
 using Microsoft.Practices.Unity.InterceptionExtension;
 using UnityDemo.BusinessLogic;
 
@@ -26,11 +27,7 @@ namespace UnityDemo
         private void InitializeContainer()
         {
             container = new UnityContainer();
-            container.AddNewExtension<Interception>();
-            container.RegisterType<IBankAccount, BankAccount>(
-                new Interceptor<InterfaceInterceptor>(),
-                new InterceptionBehavior(new TraceBehavior(
-                                     new TraceSource("interception"))));
+            container.LoadConfiguration();
 
         }
 
