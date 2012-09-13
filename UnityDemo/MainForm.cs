@@ -32,6 +32,30 @@ namespace UnityDemo
                 new InterceptionBehavior<PolicyInjectionBehavior>(),
                 new Interceptor<InterfaceInterceptor>());
 
+            container.Configure<Interception>()
+                    .AddPolicy("policy-updates")
+                        .AddMatchingRule<TypeMatchingRule>(
+                            new InjectionConstructor(
+                                new InjectionParameter(typeof(IBankAccount))))
+                        .AddMatchingRule<MemberNameMatchingRule>(
+                            new InjectionConstructor(
+                                new InjectionParameter(new string[] { "Deposit", "Withdraw" })))
+                        .AddCallHandler<TraceCallHandler>(
+                            new ContainerControlledLifetimeManager(),
+                            new InjectionConstructor(
+                                new TraceSource("interception-updates")))
+            	    .Interception
+	                .AddPolicy("policy-query") 
+	                    .AddMatchingRule<TypeMatchingRule>( 
+	                        new InjectionConstructor( 
+	                            new InjectionParameter(typeof(IBankAccount)))) 
+	                    .AddMatchingRule<MemberNameMatchingRule>( 
+	                        new InjectionConstructor("GetCurrentBalance")) 
+	                    .AddCallHandler<TraceCallHandler>( 
+	                        new ContainerControlledLifetimeManager(), 
+	                        new InjectionConstructor( 
+	                            new TraceSource("interception-queries")));
+
         }
 
         private void depositButton_Click(object sender, EventArgs e)
