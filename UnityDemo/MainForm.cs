@@ -12,7 +12,7 @@ namespace UnityDemo
 {
     public partial class MainForm : Form
     {
-        private BankAccount bankAccount;
+        private IBankAccount bankAccount;
         private IUnityContainer container;
 
         public MainForm()
@@ -20,15 +20,15 @@ namespace UnityDemo
             InitializeComponent();
             InitializeContainer();
             PopulateUserList();
-            bankAccount = container.Resolve<BankAccount>();
+            bankAccount = container.Resolve<IBankAccount>();
         }
 
         private void InitializeContainer()
         {
             container = new UnityContainer();
             container.AddNewExtension<Interception>();
-            container.RegisterType<BusinessLogic.BankAccount>(
-                new Interceptor<VirtualMethodInterceptor>(),
+            container.RegisterType<IBankAccount, BankAccount>(
+                new Interceptor<InterfaceInterceptor>(),
                 new InterceptionBehavior(new TraceBehavior(
                                      new TraceSource("interception"))));
 
