@@ -2,21 +2,21 @@
 
 namespace UnityDemo.BusinessLogic
 {
-    public class BankAccount : MarshalByRefObject
+    public class BankAccount
     {
         private decimal balance;
 
-        public decimal GetCurrentBalance()
+        public virtual decimal GetCurrentBalance()
         {
             return balance;
         }
 
-        public void Deposit(decimal depositAmount)
+        public virtual void Deposit(decimal depositAmount)
         {
             balance += depositAmount;
         }
 
-        public void Withdraw(decimal withdrawAmount)
+        public virtual void Withdraw(decimal withdrawAmount)
         {
             if (withdrawAmount > balance)
             {

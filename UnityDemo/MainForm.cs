@@ -18,9 +18,8 @@ namespace UnityDemo
             InitializeComponent();
             PopulateUserList();
             bankAccount =
-                Intercept.ThroughProxy(
-                    new BankAccount(),
-                    new TransparentProxyInterceptor(),
+                Intercept.NewInstance<BankAccount>(
+                    new VirtualMethodInterceptor(),
                     new[] { new TraceBehavior(new TraceSource("interception")) });
         }
 
