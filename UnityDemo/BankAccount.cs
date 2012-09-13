@@ -2,7 +2,7 @@
 
 namespace UnityDemo.BusinessLogic
 {
-    public sealed class BankAccount
+    public class BankAccount : MarshalByRefObject
     {
         private decimal balance;
 

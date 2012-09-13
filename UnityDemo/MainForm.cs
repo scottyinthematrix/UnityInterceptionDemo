@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Security.Principal;
 using System.Windows.Forms;
+using Microsoft.Practices.Unity.InterceptionExtension;
 using UnityDemo.BusinessLogic;
 
 namespace UnityDemo
@@ -15,7 +17,11 @@ namespace UnityDemo
         {
             InitializeComponent();
             PopulateUserList();
-            bankAccount = new BankAccount();
+            bankAccount =
+                Intercept.ThroughProxy(
+                    new BankAccount(),
+                    new TransparentProxyInterceptor(),
+                    new[] { new TraceBehavior(new TraceSource("interception")) });
         }
 
         private void depositButton_Click(object sender, EventArgs e)
