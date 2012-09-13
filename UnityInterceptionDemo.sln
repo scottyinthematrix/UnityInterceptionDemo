@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityDemo", "UnityDemo\UnityDemo.csproj", "{DACCC661-64F7-40C0-8A7D-46EB0EA8260E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DACCC661-64F7-40C0-8A7D-46EB0EA8260E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DACCC661-64F7-40C0-8A7D-46EB0EA8260E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DACCC661-64F7-40C0-8A7D-46EB0EA8260E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DACCC661-64F7-40C0-8A7D-46EB0EA8260E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
